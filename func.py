@@ -44,8 +44,11 @@ def max_area_idx(contours):
     return mx_idx
 
 def license_detection(path_list:list)->None:
+    '''
+    Car image License plate bounding box
+    '''
     plt.figure(figsize=(21,7),dpi=300)
-    
+
     for i,img_path in enumerate(path_list):
         img = get_img(img_path)
         mask = cv2.Canny(img,350,500)
