@@ -31,8 +31,13 @@ def path_to_list(path)->list:
     path_list = [str(item) for item in path]
     return path_list
 
+def kernal(x,y):
+    k = np.ones((x,y),dtype=np.uint8)
+    return k
+
 def license_detection(path_list:list)->None:
     img_path = path_list[0]
     img = get_img(img_path)
     mask = cv2.Canny(img,350,500)
+    mask = cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernal(9,9))
     show(mask)
