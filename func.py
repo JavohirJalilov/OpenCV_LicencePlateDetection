@@ -22,3 +22,11 @@ def get_img(filename):
     img = cv2.imread(name)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     return img
+
+def path_to_list(path)->list:
+    '''
+    path items to str
+    add to list and return
+    '''
+    path_list = [str(item) for item in path]
+    return path_list
