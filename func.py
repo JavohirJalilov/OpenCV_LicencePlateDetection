@@ -44,16 +44,19 @@ def max_area_idx(contours):
     return mx_idx
 
 def license_detection(path_list:list)->None:
-    img_path = path_list[0]
-    img = get_img(img_path)
-    mask = cv2.Canny(img,350,500)
-    mask = cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernal(9,9))
-    mask = cv2.dilate(mask,kernal(5,5))
-    mask = cv2.erode(mask,kernal(6,6))
+    for i,img_path in enumerate(path_list):
+        img = get_img(img_path)
+        mask = cv2.Canny(img,350,500)
+        mask = cv2.morphologyEx(mask,cv2.MORPH_CLOSE,kernal(9,9))
+        mask = cv2.dilate(mask,kernal(5,5))
+        mask = cv2.erode(mask,kernal(6,6))
 
-    contours,_ =cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-    mx_idx = max_area_idx(contours)
-    x,y,w,h = cv2.boundingRect(contours[mx_idx])
-    img = cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
-    cv2.imwrite('detect_license.png',cv2.cvtColor(img,cv2.COLOR_RGB2BGR))
-    show(img)
+        contours,_ =cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        mx_idx = max_area_idx(contours)
+        x,y,w,h = cv2.boundingRect(contours[mx_idx])
+        img = cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),3)
+        cv2.imwrite('detect_license.png',cv2.cvtColor(img,cv2.COLOR_RGB2BGR))
+
+        plt.subplot(3,7,i+1)
+        plt.imshow(img)
+    plt.show()
