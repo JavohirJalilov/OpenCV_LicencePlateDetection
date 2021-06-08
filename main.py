@@ -11,4 +11,5 @@ from func import show, get_img
 path_images = pathlib.Path('CAR_IMG_600X600').iterdir()
 
 path_list = func.path_to_list(path_images)
-print(path_list)
+
+func.license_detection(path_list)

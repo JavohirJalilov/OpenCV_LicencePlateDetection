@@ -19,7 +19,7 @@ def get_img(filename):
     parameter filename.
     return BGR to RGB image
     '''
-    img = cv2.imread(name)
+    img = cv2.imread(filename)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     return img
 
@@ -30,3 +30,9 @@ def path_to_list(path)->list:
     '''
     path_list = [str(item) for item in path]
     return path_list
+
+def license_detection(path_list:list)->None:
+    img_path = path_list[0]
+    img = get_img(img_path)
+    mask = cv2.Canny(img,350,500)
+    show(mask)
